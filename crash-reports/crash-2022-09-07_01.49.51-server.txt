@@ -1,0 +1,686 @@
+---- Minecraft Crash Report ----
+// Lolis deobfuscated this stacktrace using MCP's stable-39 mappings.
+// Surprise! Haha. Well, this is awkward.
+
+Time: 2022-09-07 01:49:51 MSK
+Description: Watching Server
+
+java.lang.Error: ServerHangWatchdog detected that a single server tick took 60.00 seconds (should be max 0.05)
+    at com.google.common.cache.LocalCache$Segment.getEntry(LocalCache.java:2826)
+    at com.google.common.cache.LocalCache$Segment.getLiveEntry(LocalCache.java:2846)
+    at com.google.common.cache.LocalCache$Segment.containsKey(LocalCache.java:2905)
+    at com.google.common.cache.LocalCache.containsKey(LocalCache.java:4317)
+    at net.minecraft.launchwrapper.LaunchClassLoader.getClassBytes(LaunchClassLoader.java:345)
+    at net.minecraft.launchwrapper.LaunchClassLoader.findClass(LaunchClassLoader.java:176)
+    at java.lang.ClassLoader.loadClass(Unknown Source)
+    at java.lang.ClassLoader.loadClass(Unknown Source)
+    at net.minecraft.network.NetworkManager.sendPacket(NetworkManager.java:176)
+    at net.minecraftforge.fml.common.network.handshake.NetworkDispatcher.sendProxy(NetworkDispatcher.java:462)
+    at net.minecraftforge.fml.common.network.FMLOutboundHandler.write(FMLOutboundHandler.java:389)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:738)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeWrite(AbstractChannelHandlerContext.java:730)
+    at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:816)
+    at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:723)
+    at io.netty.handler.codec.MessageToMessageEncoder.write(MessageToMessageEncoder.java:111)
+    at io.netty.handler.codec.MessageToMessageCodec.write(MessageToMessageCodec.java:116)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:738)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:801)
+    at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:814)
+    at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:794)
+    at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:831)
+    at io.netty.channel.DefaultChannelPipeline.writeAndFlush(DefaultChannelPipeline.java:1032)
+    at io.netty.channel.AbstractChannel.writeAndFlush(AbstractChannel.java:296)
+    at com.feed_the_beast.ftblib.lib.net.MessageToClient.sendToAll(MessageToClient.java:43)
+    at com.feed_the_beast.ftbutilities.handlers.FTBUtilitiesServerEventHandler.onServerTick(FTBUtilitiesServerEventHandler.java:231)
+    at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_432_FTBUtilitiesServerEventHandler_onServerTick_ServerTickEvent.invoke(.dynamic)
+    at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+    at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:182)
+    at net.minecraftforge.fml.common.FMLCommonHandler.onPostServerTick(FMLCommonHandler.java:266)
+    at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:712)
+    at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:526)
+    at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Thread Dump --
+  Threads: "Netty Server IO #12" Id=90 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@5861f72d
+           -  locked java.util.Collections$UnmodifiableSet@56a61251
+           -  locked sun.nio.ch.WindowsSelectorImpl@52999c5d
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #11" Id=89 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@179b186a
+           -  locked java.util.Collections$UnmodifiableSet@40945d2b
+           -  locked sun.nio.ch.WindowsSelectorImpl@26c6ebf2
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #10" Id=88 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@3823f003
+           -  locked java.util.Collections$UnmodifiableSet@77b4e725
+           -  locked sun.nio.ch.WindowsSelectorImpl@15ab81fd
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #9" Id=87 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@4a371c1
+           -  locked java.util.Collections$UnmodifiableSet@23273abe
+           -  locked sun.nio.ch.WindowsSelectorImpl@73fa7c30
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #8" Id=86 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@3a97bfdb
+           -  locked java.util.Collections$UnmodifiableSet@25a5fc31
+           -  locked sun.nio.ch.WindowsSelectorImpl@3f4dd0f1
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #7" Id=85 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@1ff620d4
+           -  locked java.util.Collections$UnmodifiableSet@18982d96
+           -  locked sun.nio.ch.WindowsSelectorImpl@12561ec0
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #6" Id=84 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@434d9e23
+           -  locked java.util.Collections$UnmodifiableSet@6d13e61e
+           -  locked sun.nio.ch.WindowsSelectorImpl@343e92b7
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #5" Id=83 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@16bc2aee
+           -  locked java.util.Collections$UnmodifiableSet@392f129c
+           -  locked sun.nio.ch.WindowsSelectorImpl@4b7e20b1
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #4" Id=82 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@b15a843
+           -  locked java.util.Collections$UnmodifiableSet@7c090895
+           -  locked sun.nio.ch.WindowsSelectorImpl@3df34e7a
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Netty Server IO #3" Id=81 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@7329add
+           -  locked java.util.Collections$UnmodifiableSet@21436dc8
+           -  locked sun.nio.ch.WindowsSelectorImpl@153a94d5
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "Chunk I/O Executor Thread-1" Id=76 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@321d9896
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@321d9896
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "Netty Server IO #2" Id=75 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@21ea087a
+           -  locked java.util.Collections$UnmodifiableSet@1b7d0ca2
+           -  locked sun.nio.ch.WindowsSelectorImpl@5aa0bf24
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "pool-4-thread-4" Id=74 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "pool-4-thread-3" Id=73 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "pool-4-thread-2" Id=72 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "pool-4-thread-1" Id=71 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4a755ce
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "threadDeathWatcher-2-1" Id=70 TIMED_WAITING
+           at java.lang.Thread.sleep(Native Method)
+           at io.netty.util.ThreadDeathWatcher$Watcher.run(ThreadDeathWatcher.java:152)
+           at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "Netty Server IO #1" Id=69 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@757f24f8
+           -  locked java.util.Collections$UnmodifiableSet@6142ee9
+           -  locked sun.nio.ch.WindowsSelectorImpl@5992e890
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "File IO Thread" Id=68 TIMED_WAITING
+           at java.lang.Thread.sleep(Native Method)
+           at net.minecraft.world.storage.ThreadedFileIOBase.func_75736_b(SourceFile:51)
+           at net.minecraft.world.storage.ThreadedFileIOBase.run(SourceFile:30)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "spark-forge-async-worker" Id=67 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@67a5df49
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@67a5df49
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(Unknown Source)
+           at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           ...
+           
+           
+           "spark-cpu-monitor" Id=66 TIMED_WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@6b717fa1
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@6b717fa1
+           at java.util.concurrent.locks.LockSupport.parkNanos(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(Unknown Source)
+           at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(Unknown Source)
+           at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           ...
+           
+           
+           "pool-3-thread-1" Id=65 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4cb57740
+           at sun.misc.Unsafe.park(Native Method)
+           -  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@4cb57740
+           at java.util.concurrent.locks.LockSupport.park(Unknown Source)
+           at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(Unknown Source)
+           at java.util.concurrent.LinkedBlockingQueue.take(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.getTask(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+           at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "Server Watchdog" Id=64 RUNNABLE
+           at sun.management.ThreadImpl.dumpThreads0(Native Method)
+           at sun.management.ThreadImpl.dumpAllThreads(Unknown Source)
+           at net.minecraft.server.dedicated.ServerHangWatchdog.run(ServerHangWatchdog.java:45)
+           at java.lang.Thread.run(Unknown Source)
+           
+           
+           "Ender IO Scheduler" Id=62 TIMED_WAITING
+           at java.lang.Thread.sleep(Native Method)
+           at crazypants.enderio.base.scheduler.Scheduler.run(Scheduler.java:41)
+           
+           
+           "Netty Server IO #0" Id=58 RUNNABLE
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(Unknown Source)
+           at sun.nio.ch.WindowsSelectorImpl.doSelect(Unknown Source)
+           at sun.nio.ch.SelectorImpl.lockAndDoSelect(Unknown Source)
+           -  locked io.netty.channel.nio.SelectedSelectionKeySet@22dd02e
+           -  locked java.util.Collections$UnmodifiableSet@4bbb08b5
+           -  locked sun.nio.ch.WindowsSelectorImpl@2bd7fa14
+           at sun.nio.ch.SelectorImpl.select(Unknown Source)
+           at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+           at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:732)
+           ...
+           
+           
+           "DestroyJavaVM" Id=29 RUNNABLE
+           
+           
+           "Server console handler" Id=28 RUNNABLE (in native)
+           at java.io.FileInputStream.readBytes(Native Method)
+           at java.io.FileInputStream.read(Unknown Source)
+           at java.io.BufferedInputStream.read1(Unknown Source)
+           at java.io.BufferedInputStream.read(Unknown Source)
+           -  locked java.io.BufferedInputStream@4cbf9759
+           at sun.nio.cs.StreamDecoder.readBytes(Unknown Source)
+           at sun.nio.cs.StreamDecoder.implRead(Unknown Source)
+           at sun.nio.cs.StreamDecoder.read(Unknown Source)
+           -  locked java.io.InputStreamReader@20ff8240
+           at java.io.InputStreamReader.read(Unknown Source)
+           ...
+           
+           
+           "Server thread" Id=26 RUNNABLE
+           at com.google.common.cache.LocalCache$Segment.getEntry(LocalCache.java:2826)
+           at com.google.common.cache.LocalCache$Segment.getLiveEntry(LocalCache.java:2846)
+           at com.google.common.cache.LocalCache$Segment.containsKey(LocalCache.java:2905)
+           at com.google.common.cache.LocalCache.containsKey(LocalCache.java:4317)
+           at net.minecraft.launchwrapper.LaunchClassLoader.getClassBytes(LaunchClassLoader.java:345)
+           at net.minecraft.launchwrapper.LaunchClassLoader.findClass(LaunchClassLoader.java:176)
+           at java.lang.ClassLoader.loadClass(Unknown Source)
+           -  locked net.minecraft.launchwrapper.LaunchClassLoader@3d012ddd
+           at java.lang.ClassLoader.loadClass(Unknown Source)
+           ...
+           
+           Number of locked synchronizers = 1
+           - java.util.concurrent.locks.ReentrantReadWriteLock$NonfairSync@3392d84a
+           
+           
+           "Server Infinisleeper" Id=25 TIMED_WAITING
+           at java.lang.Thread.sleep(Native Method)
+           at net.minecraft.server.dedicated.DedicatedServer$1.run(DedicatedServer.java:82)
+           
+           
+           "Snooper Timer" Id=24 TIMED_WAITING on java.util.TaskQueue@27819376
+           at java.lang.Object.wait(Native Method)
+           -  waiting on java.util.TaskQueue@27819376
+           at java.util.TimerThread.mainLoop(Unknown Source)
+           at java.util.TimerThread.run(Unknown Source)
+           
+           
+           "Attach Listener" Id=5 RUNNABLE
+           
+           
+           "Signal Dispatcher" Id=4 RUNNABLE
+           
+           
+           "Finalizer" Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@17b4dd80
+           at java.lang.Object.wait(Native Method)
+           -  waiting on java.lang.ref.ReferenceQueue$Lock@17b4dd80
+           at java.lang.ref.ReferenceQueue.remove(Unknown Source)
+           at java.lang.ref.ReferenceQueue.remove(Unknown Source)
+           at java.lang.ref.Finalizer$FinalizerThread.run(Unknown Source)
+           
+           
+           "Reference Handler" Id=2 WAITING on java.lang.ref.Reference$Lock@4b85a0b4
+           at java.lang.Object.wait(Native Method)
+           -  waiting on java.lang.ref.Reference$Lock@4b85a0b4
+           at java.lang.Object.wait(Unknown Source)
+           at java.lang.ref.Reference.tryHandlePending(Unknown Source)
+           at java.lang.ref.Reference$ReferenceHandler.run(Unknown Source)
+
+-- System Details --
+  Minecraft Version: 1.12.2
+  Operating System: Windows 11 (amd64) version 10.0
+  Java Version: 1.8.0_333, Oracle Corporation
+  Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+  Memory: 2032388096 bytes (1938 MB) / 4240965632 bytes (4044 MB) up to 4240965632 bytes (4044 MB)
+  JVM Flags: 2 total; -Xms4096M -Xmx4096M
+  IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+  FML: MCP 9.42 LoliASM 5.2 Powered by Forge 14.23.5.2860 145 mods loaded, 145 mods active
+       States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+       
+       | State  | ID                                | Version                            | Source                                                     | Signature                                |
+       |:------ |:--------------------------------- |:---------------------------------- |:---------------------------------------------------------- |:---------------------------------------- |
+       | LCHIJA | minecraft                         | 1.12.2                             | minecraft.jar                                              | None                                     |
+       | LCHIJA | mcp                               | 9.42                               | minecraft.jar                                              | None                                     |
+       | LCHIJA | bansoukou                         | 4.3.1                              | minecraft.jar                                              | None                                     |
+       | LCHIJA | FML                               | 8.0.99.99                          | forge-1.12.2-14.23.5.2860.jar                              | e3c3d50c7c986df74c645c0ac54639741c90a557 |
+       | LCHIJA | forge                             | 14.23.5.2860                       | forge-1.12.2-14.23.5.2860.jar                              | e3c3d50c7c986df74c645c0ac54639741c90a557 |
+       | LCHIJA | advancedrocketrycore              | 1                                  | minecraft.jar                                              | None                                     |
+       | LCHIJA | creativecoredummy                 | 1.0.0                              | minecraft.jar                                              | None                                     |
+       | LCHIJA | littletilescore                   | 1.0.0                              | minecraft.jar                                              | None                                     |
+       | LCHIJA | mixinbooter                       | 4.2                                | minecraft.jar                                              | None                                     |
+       | LCHIJA | foamfixcore                       | 7.7.4                              | minecraft.jar                                              | None                                     |
+       | LCHIJA | randompatches                     | 1.12.2-1.22.1.10                   | randompatches-1.12.2-1.22.1.10.jar                         | None                                     |
+       | LCHIJA | fastbench                         | 1.7.3                              | FastWorkbench-1.12.2-1.7.3.jar                             | None                                     |
+       | LCHIJA | actuallyadditions                 | 1.12.2-r152                        | ActuallyAdditions-1.12.2-r152.jar                          | None                                     |
+       | LCHIJA | baubles                           | 1.5.2                              | Baubles-1.12-1.5.2.jar                                     | None                                     |
+       | LCHIJA | actuallybaubles                   | 1.1                                | ActuallyBaubles-1.12-1.1.jar                               | None                                     |
+       | LCHIJA | redstoneflux                      | 2.1.1                              | RedstoneFlux-1.12-2.1.1.1-universal.jar                    | None                                     |
+       | LCHIJA | cofhcore                          | 4.6.6                              | CoFHCore-1.12.2-4.6.6.1-universal.jar                      | None                                     |
+       | LCHIJA | libvulpes                         | 0.4.2.-88                          | LibVulpes-1.12.2-0.4.2-88-universal.jar                    | None                                     |
+       | LCHIJA | advancedrocketry                  | 1.7.0.-232                         | AdvancedRocketry-1.12.2-1.7.0-232-universal.jar            | None                                     |
+       | LCHIJA | advsolars                         | 1.0                                | advsolars-1.0.jar                                          | None                                     |
+       | LCHIJA | appliedenergistics2               | rv6-stable-7-extended_life-v0.53.3 | appliedenergistics2-rv6-stable-7-extended_life-v0.53.3.jar | None                                     |
+       | LCHIJA | bdlib                             | 1.14.3.12                          | bdlib-1.14.3.12-mc1.12.2.jar                               | None                                     |
+       | LCHIJA | ae2stuff                          | 0.7.0.4                            | ae2stuff-0.7.0.4-mc1.12.2.jar                              | None                                     |
+       | LCHIJA | endercore                         | 1.12.2-0.5.76                      | EnderCore-1.12.2-0.5.76.jar                                | None                                     |
+       | LCHIJA | crafttweaker                      | 4.1.20                             | CraftTweaker2-1.12-4.1.20.673.jar                          | None                                     |
+       | LCHIJA | mtlib                             | 3.0.7                              | MTLib-3.0.7.jar                                            | None                                     |
+       | LCHIJA | modtweaker                        | 4.0.19                             | modtweaker-4.0.20.5.jar                                    | None                                     |
+       | LCHIJA | jei                               | 4.19.0                             | HadEnoughItems_1.12.2-4.19.0.jar                           | None                                     |
+       | LCHIJA | codechickenlib                    | 3.2.3.358                          | CodeChickenLib-1.12.2-3.2.3.358-universal.jar              | f1850c39b2516232a2108a7bd84d1cb5df93b261 |
+       | LCHIJA | brandonscore                      | 2.4.20                             | BrandonsCore-1.12.2-2.4.20.162-universal.jar               | None                                     |
+       | LCHIJA | cofhworld                         | 1.4.0                              | CoFHWorld-1.12.2-1.4.0.1-universal.jar                     | None                                     |
+       | LCHIJA | thermalfoundation                 | 2.6.7                              | ThermalFoundation-1.12.2-2.6.7.1-universal.jar             | None                                     |
+       | LCHIJA | draconicevolution                 | 2.3.28                             | Draconic-Evolution-1.12.2-2.3.28.354-universal.jar         | None                                     |
+       | LCHIJA | thermalexpansion                  | 5.5.7                              | ThermalExpansion-1.12.2-5.5.7.1-universal.jar              | None                                     |
+       | LCHIJA | enderio                           | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | p455w0rdslib                      | 2.3.161                            | p455w0rdslib-1.12.2-2.3.161.jar                            | 186bc454cd122c9c2f1aa4f95611254bcc543363 |
+       | LCHIJA | ae2wtlib                          | 1.0.34                             | AE2WTLib-1.12.2-1.0.34.jar                                 | 186bc454cd122c9c2f1aa4f95611254bcc543363 |
+       | LCHIJA | appleskin                         | 1.0.14                             | AppleSkin-mc1.12-1.0.14.jar                                | None                                     |
+       | LCHIJA | architecturecraft                 | @VERSION@                          | architecturecraft-1.12-3.98.jar                            | None                                     |
+       | LCHIJA | thedragonlib                      | 1.12.2-5.3.0                       | thedragonlib-1.12.2-5.3.0.jar                              | None                                     |
+       | LCHIJA | armorplus                         | 1.12.2-11.25.1.62                  | armorplus-1.12.2-11.25.1.62.jar                            | None                                     |
+       | LCHIJA | attributefix                      | 1.0.4                              | AttributeFix-1.12.2-1.0.4.jar                              | d476d1b22b218a10d845928d1665d45fce301b27 |
+       | LCHIJA | autoreglib                        | 1.3-32                             | AutoRegLib-1.3-32.jar                                      | None                                     |
+       | LCHIJA | avaritia                          | 3.3.0                              | Avaritia-1.12.2-3.3.0.37-universal.jar                     | None                                     |
+       | LCHIJA | base                              | 3.14.0                             | base-1.12.2-3.14.0.jar                                     | None                                     |
+       | LCHIJA | betterquesting                    | 4.0.5                              | BetterQuestingUnofficial-4.0.5.jar                         | None                                     |
+       | LCHIJA | bookshelf                         | 2.3.590                            | Bookshelf-1.12.2-2.3.590.jar                               | d476d1b22b218a10d845928d1665d45fce301b27 |
+       | LCHIJA | forgelin                          | 1.8.4                              | Forgelin-1.8.4.jar                                         | None                                     |
+       | LCHIJA | bountiful                         | 2.2.2                              | Bountiful-2.2.2.jar                                        | None                                     |
+       | LCHIJA | buildinggadgets                   | 2.8.4                              | BuildingGadgets-2.8.4.jar                                  | None                                     |
+       | LCHIJA | chameleon                         | 1.12-4.1.3                         | Chameleon-1.12-4.1.3.jar                                   | None                                     |
+       | LCHIJA | chesttransporter                  | 2.8.8                              | ChestTransporter-1.12.2-2.8.8.jar                          | None                                     |
+       | LCHIJA | chisel                            | MC1.12.2-1.0.2.45                  | Chisel-MC1.12.2-1.0.2.45.jar                               | None                                     |
+       | LCHIJA | clumps                            | 3.1.2                              | Clumps-3.1.2.jar                                           | None                                     |
+       | LCHIJA | contenttweaker                    | 1.12.2-4.10.0                      | ContentTweaker-1.12.2-4.10.0.jar                           | None                                     |
+       | LCHIJA | craftelytra                       | 1.2                                | CraftableElytra-1.1.jar                                    | None                                     |
+       | LCHIJA | cns                               | 1.0                                | CraftingNetherStar 1.12.1 -1.1.jar                         | None                                     |
+       | LCHIJA | craftingtweaks                    | 9.0.1                              | CraftingTweaks_1.12.2-9.0.1.jar                            | None                                     |
+       | LCHIJA | crafttweakerjei                   | 2.0.3                              | CraftTweaker2-1.12-4.1.20.673.jar                          | None                                     |
+       | LCHIJA | creativecore                      | 1.10.0                             | CreativeCore_v1.10.69_mc1.12.2.jar                         | None                                     |
+       | LCHIJA | cucumber                          | 1.1.3                              | Cucumber-1.12.2-1.1.3.jar                                  | None                                     |
+       | LCHIJA | darkutils                         | 1.8.230                            | DarkUtils-1.12.2-1.8.230.jar                               | d476d1b22b218a10d845928d1665d45fce301b27 |
+       | LCHIJA | patchouli                         | 1.0-23.6                           | Patchouli-1.0-23.6.jar                                     | None                                     |
+       | LCHIJA | deepmoblearning                   | 1.12.2-2.5.4                       | deepmoblearning-1.12.2-2.5.4-universal.jar                 | None                                     |
+       | LCHIJA | defaultworldgenerator-port        | 1.12-2.3.1                         | DefaultWorldGenerator-port-1.12-2.3.1.jar                  | None                                     |
+       | LCHIJA | gregtech                          | 2.4.1-beta                         | gregtech-1.12.2-2.4.1-beta.jar                             | None                                     |
+       | LCHIJA | devtech                           | 2.1.2                              | devtech-2.1.2.jar                                          | None                                     |
+       | LCHIJA | diethopper                        | 1.1                                | diethopper-1.1.jar                                         | None                                     |
+       | LCHIJA | theoneprobe                       | 1.4.28                             | theoneprobe-1.12-1.4.28.jar                                | None                                     |
+       | LCHIJA | dimensionaledibles                | 1.12.2-1.6.4                       | DimensionalEdibles-1.12.2-1.6.4.jar                        | None                                     |
+       | LCHIJA | effortlessbuilding                | 1.12.2-2.16                        | effortlessbuilding-1.12.2-2.16.jar                         | None                                     |
+       | LCHIJA | elevatorid                        | 1.3.14                             | ElevatorMod-1.12.2-1.3.14.jar                              | None                                     |
+       | LCHIJA | enderiointegrationtic             | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderiobase                       | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioconduits                   | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioconduitsappliedenergistics | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioconduitsopencomputers      | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioconduitsrefinedstorage     | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderiointegrationforestry        | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderiointegrationticlate         | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioinvpanel                   | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | ftblib                            | 5.4.7.2                            | FTBLib-5.4.7.2.jar                                         | None                                     |
+       | LCHIJA | enderiomachines                   | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderiopowertools                 | 5.3.70                             | EnderIO-1.12.2-5.3.70.jar                                  | None                                     |
+       | LCHIJA | enderioendergy                    | 5.3.70                             | EnderIO-endergy-1.12.2-5.3.70.jar                          | None                                     |
+       | LCHIJA | enderstorage                      | 2.4.6.137                          | EnderStorage-1.12.2-2.4.6.137-universal.jar                | f1850c39b2516232a2108a7bd84d1cb5df93b261 |
+       | LCHIJA | extendedcrafting                  | 1.7.0                              | ExtendedCrafting-Nomifactory-Edition-1.7.0.jar             | None                                     |
+       | LCHIJA | extrautils2                       | 1.0                                | extrautils2-1.12-1.9.9.jar                                 | None                                     |
+       | LCHIJA | fasterladderclimbing              | 0.1-146                            | FasterLadderClimbing-1.12-0.1-146.jar                      | None                                     |
+       | LCHIJA | fastleafdecay                     | v14                                | FastLeafDecay-v14.jar                                      | None                                     |
+       | LCHIJA | foamfix                           | 0.10.14-1.12.2                     | foamfix-0.10.14-1.12.2.jar                                 | None                                     |
+       | LCHIJA | forgemultipartcbe                 | 2.6.2.83                           | ForgeMultipart-1.12.2-2.6.2.83-universal.jar               | f1850c39b2516232a2108a7bd84d1cb5df93b261 |
+       | LCHIJA | microblockcbe                     | 2.6.2.83                           | ForgeMultipart-1.12.2-2.6.2.83-universal.jar               | None                                     |
+       | LCHIJA | minecraftmultipartcbe             | 2.6.2.83                           | ForgeMultipart-1.12.2-2.6.2.83-universal.jar               | None                                     |
+       | LCHIJA | forgivingvoid                     | 1.1.0                              | ForgivingVoid_1.12.2-1.1.0.jar                             | None                                     |
+       | LCHIJA | storagedrawers                    | 5.2.2                              | StorageDrawers-1.12.2-5.4.2.jar                            | None                                     |
+       | LCHIJA | framedcompactdrawers              | 1.2.7                              | framedcompactdrawers-1.2.7.jar                             | None                                     |
+       | LCHIJA | ftbbackups                        | 1.1.0.1                            | FTBBackups-1.1.0.1.jar                                     | None                                     |
+       | LCHIJA | ftbutilities                      | 5.4.1.131                          | FTBUtilities-5.4.1.131.jar                                 | None                                     |
+       | LCHIJA | globalgamerules                   | 2.2                                | GlobalGameRules-1.12.2-2.2.7.jar                           | None                                     |
+       | LCHIJA | gcym                              | 1.1.4                              | GregicalityMultiblocks-1.12.2-1.1.4.jar                    | None                                     |
+       | LCHIJA | librarianlib                      | 4.22                               | librarianlib-1.12.2-4.22.jar                               | None                                     |
+       | LCHIJA | hooked                            | %VERSION%                          | hooked-1.0.3.jar                                           | None                                     |
+       | LCHIJA | inventorytweaks                   | 1.63+release.109.220f184           | InventoryTweaks-1.63.jar                                   | 55d2cd4f5f0961410bf7b91ef6c6bf00a766dcbe |
+       | LCHIJA | journeymap                        | 1.12.2-5.7.1                       | journeymap-1.12.2-5.7.1.jar                                | None                                     |
+       | LCHIJA | jecalculation                     | 1.12.2-3.2.7                       | JustEnoughCalculation-1.12.2-3.2.7.jar                     | None                                     |
+       | LCHIJA | justenoughdimensions              | 1.6.0-dev.20200416.184714          | justenoughdimensions-1.12.2-1.6.0-dev.20200416.184714.jar  | 2b03e1423915a189b8094816baa18f239d576dff |
+       | LCHIJA | littletiles                       | 1.5.0                              | LittleTiles_v1.5.57_mc1.12.2.jar                           | None                                     |
+       | LCHIJA | spark                             | 1.5.2                              | spark-forge1122.jar                                        | None                                     |
+       | LCHIJA | loliasm                           | 5.2                                | loliasm-5.2.jar                                            | None                                     |
+       | LCHIJA | lostcities                        | 2.0.22                             | lostcities-1.12-2.0.22.jar                                 | None                                     |
+       | LCHIJA | morefurnaces                      | 1.11.0                             | MoreFurnaces-Nomifactory-Edition-1.12.2-1.11.0.jar         | None                                     |
+       | LCHIJA | morelibs                          | 1.2.2                              | morelibs-1.12.2-1.2.2.jar                                  | None                                     |
+       | LCHIJA | mrtjpcore                         | 2.1.4.43                           | MrTJPCore-1.12.2-2.1.4.43-universal.jar                    | None                                     |
+       | LCHIJA | projectred-core                   | 4.9.4.120                          | ProjectRed-1.12.2-4.9.4.120-Base.jar                       | None                                     |
+       | LCHIJA | moreplates                        | 5.5.2                              | moreplates-1.12.2-5.5.2.jar                                | None                                     |
+       | LCHIJA | morpheus                          | 1.12.2-3.5.106                     | Morpheus-1.12.2-3.5.106.jar                                | None                                     |
+       | LCHIJA | multiblocktweaker                 | 1.12.2-stable-gtceu-1.8.0          | multiblocktweaker-1.12.2-stable-gtceu-1.8.0.jar            | None                                     |
+       | LCHIJA | nonetherportals                   | 1.0.0                              | nonetherPortals_v1.0.0formc1.12.2.jar                      | None                                     |
+       | LCHIJA | nuclearcraft                      | 2.18y                              | NuclearCraft-2.18y-1.12.2-patched.jar                      | None                                     |
+       | LCHIJA | openglider                        | @VERSION@                          | OpenGlider-1.12.1-1.1.0.jar                                | None                                     |
+       | LCHIJA | packagedauto                      | 1.12.2-1.0.5.19                    | PackagedAuto-1.12.2-1.0.5.19.jar                           | None                                     |
+       | LCHIJA | packagedexcrafting                | 1.12.2-1.0.2.3                     | PackagedExCrafting-1.12.2-1.0.2.3.jar                      | None                                     |
+       | LCHIJA | packmode                          | 1.2.0                              | packmode-1.12.2-1.2.0.jar                                  | None                                     |
+       | LCHIJA | placebo                           | 1.6.0                              | Placebo-1.12.2-1.6.0.jar                                   | None                                     |
+       | LCHIJA | projectred-integration            | 4.9.4.120                          | ProjectRed-1.12.2-4.9.4.120-integration.jar                | None                                     |
+       | LCHIJA | projectred-transmission           | 4.9.4.120                          | ProjectRed-1.12.2-4.9.4.120-integration.jar                | None                                     |
+       | LCHIJA | redstonearsenal                   | 2.6.6                              | RedstoneArsenal-1.12.2-2.6.6.1-universal.jar               | None                                     |
+       | LCHIJA | simplyjetpacks                    | 2.2.15.69                          | SimplyJetpacks2-1.12.2-2.2.15.69.jar                       | None                                     |
+       | LCHIJA | snad                              | 1.12.1-1.7.09.16a                  | Snad-1.12.1-1.7.09.16a.jar                                 | None                                     |
+       | LCHIJA | solarflux                         | 12.4.11                            | SolarFluxReborn-1.12.2-12.4.11.jar                         | 9f5e2a811a8332a842b34f6967b7db0ac4f24856 |
+       | LCHIJA | supersoundmuffler                 | 1.0.2.10                           | supersoundmuffler-revived_1.12.2_1.0.2.10.jar              | None                                     |
+       | LCHIJA | thermalcultivation                | 0.3.6                              | ThermalCultivation-1.12.2-0.3.6.1-universal.jar            | None                                     |
+       | LCHIJA | thermalinnovation                 | 0.3.6                              | ThermalInnovation-1.12.2-0.3.6.1-universal.jar             | None                                     |
+       | LCHIJA | tombmanygraves                    | 1.12-4.2.0                         | TombManyGraves-1.12-4.2.0.jar                              | None                                     |
+       | LCHIJA | topaddons                         | 1.12.2-1.13.0                      | topaddons-1.12.2-1.13.0.jar                                | None                                     |
+       | LCHIJA | torchmaster                       | 1.8.5.0                            | torchmaster_1.12.2-1.8.5.0.jar                             | None                                     |
+       | LCHIJA | trashslot                         | 8.4.10                             | TrashSlot_1.12.2-8.4.10.jar                                | None                                     |
+       | LCHIJA | ulv_covers                        | 0.2.2                              | ULVCovers-1.12.2-0.2.2.jar                                 | None                                     |
+       | LCHIJA | wct                               | 3.12.97                            | WirelessCraftingTerminal-1.12.2-3.12.97.jar                | 186bc454cd122c9c2f1aa4f95611254bcc543363 |
+       | LCHIJA | worleycaves                       | 1.5.2                              | worleycaves-1.12.2-1.5.2.jar                               | None                                     |
+       | LCHIJA | xtones                            | 1.2.2                              | Xtones-1.2.2.jar                                           | None                                     |
+       | LCHIJA | densemetals                       | 2.0.0                              | DenseMetals-1.12.2-2.0.0.30.jar                            | d476d1b22b218a10d845928d1665d45fce301b27 |
+       | LCHIJA | phosphor-lighting                 | 1.12.2-0.2.6                       | phosphor-1.12.2-0.2.6+build50-universal.jar                | f0387d288626cc2d937daa504e74af570c52a2f1 |
+       | LCHIJA | librarianliblate                  | 4.22                               | librarianlib-1.12.2-4.22.jar                               | None                                     |
+  Loaded coremods (and transformers): GregTechLoadingPlugin (gregtech-1.12.2-2.4.1-beta.jar)
+                                        gregtech.core.GregTechTransformer
+                                      RandomPatches (randompatches-1.12.2-1.22.1.10.jar)
+                                        com.therandomlabs.randompatches.core.RPTransformer
+                                      -Bansoukou- (_bansoukou-4.3.1.jar)
+                                        
+                                      RBLoadingPlugin (RealBench-1.12.2-1.3.3.jar)
+                                        pw.prok.realbench.asm.RBTransformer
+                                      LibrarianLib Plugin (librarianlib-1.12.2-4.22.jar)
+                                        com.teamwizardry.librarianlib.asm.LibLibTransformer
+                                      LoliASM (loliasm-5.2.jar)
+                                        
+                                      ForgelinPlugin (Forgelin-1.8.4.jar)
+                                        
+                                      Do not report to Forge! (If you haven't disabled the FoamFix coremod, try disabling it in the config! Note that this bit of text will still appear.) (foamfix-0.10.14-1.12.2.jar)
+                                        pl.asie.foamfix.coremod.FoamFixTransformer
+                                      AdvancedRocketryPlugin (AdvancedRocketry-1.12.2-1.7.0-232-universal.jar)
+                                        zmaster587.advancedRocketry.asm.ClassTransformer
+                                      MixinBooter (!mixinbooter-4.2.jar)
+                                        
+                                      Inventory Tweaks Coremod (InventoryTweaks-1.63.jar)
+                                        invtweaks.forge.asm.ContainerTransformer
+                                      EnderCorePlugin (EnderCore-1.12.2-0.5.76-core.jar)
+                                        com.enderio.core.common.transform.EnderCoreTransformer
+                                        com.enderio.core.common.transform.SimpleMixinPatcher
+                                      PhosphorFMLLoadingPlugin (phosphor-1.12.2-0.2.6+build50-universal.jar)
+                                        
+                                      CreativePatchingLoader (CreativeCore_v1.10.69_mc1.12.2.jar)
+                                        
+                                      LittlePatchingLoader (LittleTiles_v1.5.57_mc1.12.2.jar)
+                                        com.creativemd.littletiles.LittleTilesTransformer
+  AE2 Version: stable rv6-stable-7-extended_life-v0.53.3 for Forge 14.23.5.2847
+  Ender IO: Found the following problem(s) with your installation (That does NOT mean that Ender IO caused the crash or was involved in it in any way. We add this information to help finding common problems, not as an invitation to post any crash you encounter to Ender IO's issue tracker. Always check the stack trace above to see which mod is most likely failing.):
+                              * Offline mode for dedicated servers is NOT supported by Ender IO.
+                             This may (look up the meaning of 'may' in the dictionary if you're not sure what it means) have caused the error. Try reproducing the crash WITHOUT this/these mod(s) before reporting it.
+            Authlib is : /D:/nomi-ceu-server-1.4/minecraft_server.1.12.2.jar
+            
+            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            !!!You are looking at the diagnostics information, not at the crash.       !!!
+            !!!Scroll up until you see the line with '---- Minecraft Crash Report ----'!!!
+            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  List of loaded APIs: * actuallyadditionsapi (34) from ActuallyAdditions-1.12.2-r152.jar
+                       * ae2wtlib|API (1.0.34) from AE2WTLib-1.12.2-1.0.34.jar
+                       * appliedenergistics2|API (rv6) from appliedenergistics2-rv6-stable-7-extended_life-v0.53.3.jar
+                       * ArmorPlusApi (2.1) from armorplus-1.12.2-11.25.1.62.jar
+                       * Base|API (1.0.0) from base-1.12.2-3.14.0.jar
+                       * Baubles|API (1.4.0.2) from Baubles-1.12-1.5.2.jar
+                       * BetterQuesting|API (3.2) from BetterQuestingUnofficial-4.0.5.jar
+                       * BetterQuesting|API2 (3.1) from BetterQuestingUnofficial-4.0.5.jar
+                       * BetterWithModsAPI (Beta 0.6) from AppleSkin-mc1.12-1.0.14.jar
+                       * chesttransporter|api (2) from ChestTransporter-1.12.2-2.8.8.jar
+                       * Chisel-API (0.0.1) from Chisel-MC1.12.2-1.0.2.45.jar
+                       * ChiselAPI|Carving (0.0.1) from Chisel-MC1.12.2-1.0.2.45.jar
+                       * cofhapi (2.5.0) from CoFHCore-1.12.2-4.6.6.1-universal.jar
+                       * CraftingTweaks|API (4.1) from CraftingTweaks_1.12.2-9.0.1.jar
+                       * DraconicEvolution|API (1.3) from Draconic-Evolution-1.12.2-2.3.28.354-universal.jar
+                       * enderioapi (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|addon (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|capacitor (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|conduits (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|farm (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|redstone (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|teleport (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|tools (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * enderioapi|upgrades (4.0.0) from EnderIO-1.12.2-5.3.70.jar
+                       * jeresources|API (0.9.2.60) from JustEnoughResources-1.12.2-0.9.2.60.jar
+                       * journeymap|client-api (1.4) from journeymap-1.12.2-5.7.1.jar
+                       * journeymap|client-api-display (1.4) from journeymap-1.12.2-5.7.1.jar
+                       * journeymap|client-api-event (1.4) from journeymap-1.12.2-5.7.1.jar
+                       * journeymap|client-api-model (1.4) from journeymap-1.12.2-5.7.1.jar
+                       * journeymap|client-api-util (1.4) from journeymap-1.12.2-5.7.1.jar
+                       * JustEnoughItemsAPI (4.13.0) from HadEnoughItems_1.12.2-4.19.0.jar
+                       * Open Glider|API (0.1) from OpenGlider-1.12.1-1.1.0.jar
+                       * PatchouliAPI (6) from Patchouli-1.0-23.6.jar
+                       * projectred|api (2.1) from ProjectRed-1.12.2-4.9.4.120-Base.jar
+                       * redstonefluxapi (2.1.1) from RedstoneFlux-1.12-2.1.1.1-universal.jar
+                       * StorageDrawersAPI (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * StorageDrawersAPI|event (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * StorageDrawersAPI|registry (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * StorageDrawersAPI|render (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * StorageDrawersAPI|storage (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * StorageDrawersAPI|storage-attribute (2.1.0) from StorageDrawers-1.12.2-5.4.2.jar
+                       * theoneprobe_api (1.4.4) from theoneprobe-1.12-1.4.28.jar
+                       * wct|api (1.1) from WirelessCraftingTerminal-1.12.2-3.12.97.jar
+  Extended Crafting: Nomifactory Edition: You are using a fork of Extended Crafting created for the Nomifactory modpack.
+                                          If the error above is a NoSuchFieldError or a NoSuchMethodError relating to
+                                          com.blakebr0.extendedcrafting,
+                                          then please report to https://github.com/Nomifactory/ExtendedCrafting/issues
+                                          with this crash report.
+                                          Otherwise, you can ignore this message.
+  AE2 Integration: IC2:OFF, GTCE:ON, RC:OFF, MFR:OFF, Waila:OFF, Mekanism:OFF, OpenComputers:OFF, THE_ONE_PROBE:ON, TESLA:OFF, CRAFTTWEAKER:ON
+  Suspected Mods: Forge Mod Loader (FML), Minecraft Forge (forge), FTB Library (ftblib), FTB Utilities (ftbutilities)
+  Profiler Position: N/A (disabled)
+  Player Count: 1 / 10; [EntityPlayerMP['Ice951'/337, l='world', x=947.39, y=70.00, z=1078.54]]
+  Is Modded: Definitely; Server brand changed to 'fml,forge'
+  Type: Dedicated Server (map_server.txt)

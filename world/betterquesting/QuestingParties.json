@@ -1,0 +1,30 @@
+{
+  "parties:9": {
+    "0:10": {
+      "members:9": {
+        "0:10": {
+          "status:8": "OWNER",
+          "uuid:8": "a53bb672-d208-3d48-a478-a96078e8ced9"
+        },
+        "1:10": {
+          "status:8": "MEMBER",
+          "uuid:8": "89eb17ea-c846-3c6f-be8c-0defc8bacc40"
+        },
+        "2:10": {
+          "status:8": "MEMBER",
+          "uuid:8": "ca442f1a-3620-36c6-b4ad-ef137e19db0e"
+        },
+        "3:10": {
+          "status:8": "MEMBER",
+          "uuid:8": "a8ea8ad4-0d52-3754-91ab-5c68069f05f7"
+        }
+      },
+      "partyID:3": 0,
+      "properties:10": {
+        "betterquesting:10": {
+          "name:8": "Серый лох"
+        }
+      }
+    }
+  }
+}
