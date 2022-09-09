@@ -17,6 +17,10 @@
         "3:10": {
           "status:8": "MEMBER",
           "uuid:8": "a8ea8ad4-0d52-3754-91ab-5c68069f05f7"
+        },
+        "4:10": {
+          "status:8": "MEMBER",
+          "uuid:8": "da066481-17c6-3ef1-be0d-0e89b05e59f2"
         }
       },
       "partyID:3": 0,

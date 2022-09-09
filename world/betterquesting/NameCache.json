@@ -19,6 +19,11 @@
       "isOP:1": 1,
       "name:8": "LeadGame",
       "uuid:8": "a8ea8ad4-0d52-3754-91ab-5c68069f05f7"
+    },
+    "4:10": {
+      "isOP:1": 0,
+      "name:8": "Zigma",
+      "uuid:8": "da066481-17c6-3ef1-be0d-0e89b05e59f2"
     }
   }
 }
